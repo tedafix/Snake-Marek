@@ -209,16 +209,22 @@ bgMusic.currentTime = 0; // reset na začátek
 crashSound.currentTime = 0;
 crashSound.play();
 
-        
-let name = prompt("Konec hry! Zadej jméno (max 10 znaků):");
 
-if (name) {
-    name = name.substring(0, 10);
-    saveScore(name, score);
-} else {
-    alert("Skóre: " + score);
-}
-restartGame();
+setTimeout(() => {
+
+        let name = prompt("Konec hry! Zadej jméno (max 10 znaků):");
+
+        if (name) {
+            name = name.substring(0, 10);
+            saveScore(name, score);
+        } else {
+            alert("Skóre: " + score);
+        }
+
+        restartGame();
+
+    }, 50);
+
         return;
     }
 
