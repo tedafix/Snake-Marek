@@ -169,6 +169,9 @@ headImage.src = "Marek-hlava.jpg";
 const headOpenImage = new Image();
 headOpenImage.src = "Marek-hlava2.jpg";
 
+	const eatSound = new Audio("polk.mp3");
+	eatSound.volume = 0.5;
+
 
 
 
@@ -206,6 +209,10 @@ if (name) {
   
 if (head.x === food.x && head.y === food.y) {
     score++;
+	
+	eatSound.currentTime = 0;
+	eatSound.play();
+	
     document.getElementById("score").innerText = score;
     food = randomFood();
 
