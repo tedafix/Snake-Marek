@@ -157,6 +157,10 @@ foodImage.src = "panák.jpg";
 
 const headImage = new Image();
 headImage.src = "Marek-hlava.jpg";
+	
+const headOpenImage = new Image();
+headOpenImage.src = "Marek-hlava2.png";
+
 
 
 
@@ -167,6 +171,7 @@ let dy = 0;
 let food = randomFood();
 let score = 0;
 let gameInterval;
+	let eating = false;
 
 document.addEventListener("keydown", changeDirection);
 
@@ -190,11 +195,19 @@ if (name) {
     snake.unshift(head);
 
     // jídlo
-    if (head.x === food.x && head.y === food.y) {
-        score++;
-        document.getElementById("score").innerText = score;
-        food = randomFood();
-    } else {
+  
+if (head.x === food.x && head.y === food.y) {
+    score++;
+    document.getElementById("score").innerText = score;
+    food = randomFood();
+
+    eating = true;
+
+    setTimeout(() => {
+        eating = false;
+    }, 150);
+}
+ else {
         snake.pop();
     }
 
@@ -233,9 +246,9 @@ ctx.stroke();
 
 if (headImage.complete) {
     const headSize = grid + 10;
-
+ const currentHead = eating ? headOpenImage : headImage;
     ctx.drawImage(
-        headImage,
+        currentHead,
         snake[0].x - (headSize - grid) / 2,
         snake[0].y - (headSize - grid) / 2,
         headSize,
