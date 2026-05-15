@@ -230,15 +230,18 @@ ctx.stroke();
 
 
 // HLAVA HADA
-const headSize = grid + 10; 
-	
-ctx.drawImage(
-    headImage,
-    snake[0].x - 8,
-    snake[0].y - 8,
-    headSize,
-    headSize
-);
+
+if (headImage.complete) {
+    const headSize = grid + 10;
+
+    ctx.drawImage(
+        headImage,
+        snake[0].x - (headSize - grid) / 2,
+        snake[0].y - (headSize - grid) / 2,
+        headSize,
+        headSize
+    );
+}
 
 
 
