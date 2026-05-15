@@ -135,7 +135,7 @@ background-color: #999;
 </div>
 
 <br>
-<button onclick="restartGame()">Restart</button>
+<button onclick="startGame()">Start</button>
 
     </div>
 
@@ -171,6 +171,15 @@ headOpenImage.src = "Marek-hlava2.jpg";
 
 	const eatSound = new Audio("polk.mp3");
 	eatSound.volume = 0.5;
+	const bgMusic = new Audio("music.mp3");
+		bgMusic.loop = true;    
+		bgMusic.volume = 0.3; 
+		
+	document.addEventListener("click", () => {
+    bgMusic.play();
+}, { once: true });
+
+
 
 
 
@@ -198,7 +207,7 @@ if (name) {
 } else {
     alert("Skóre: " + score);
 }
-
+restartGame();
         return;
     }
 
@@ -342,11 +351,18 @@ function restartGame() {
     score = 0;
     document.getElementById("score").innerText = score;
     clearInterval(gameInterval);
-    gameInterval = setInterval(gameLoop, 220);
+    
 }
 
 // start
-gameInterval = setInterval(gameLoop, 220);
+
+function startGame() {
+    clearInterval(gameInterval);
+    gameInterval = setInterval(gameLoop, 220);
+
+    bgMusic.play();
+}
+
 
 
 function saveScore(name, score) {
