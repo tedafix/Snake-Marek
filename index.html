@@ -170,10 +170,14 @@ const headOpenImage = new Image();
 headOpenImage.src = "Marek-hlava2.jpg";
 
 	const eatSound = new Audio("polk.mp3");
-	eatSound.volume = 0.5;
+	eatSound.volume = 0.7;
 	const bgMusic = new Audio("music.mp3");
 		bgMusic.loop = true;    
 		bgMusic.volume = 0.3; 
+	
+const crashSound = new Audio("crash.mp3");
+crashSound.volume = 0.8;
+
 		
 	document.addEventListener("click", () => {
     bgMusic.play();
@@ -198,6 +202,13 @@ document.addEventListener("keydown", changeDirection);
 function gameLoop() {
     if (checkCollision()) {
         clearInterval(gameInterval);
+		
+bgMusic.pause();   // vypne hudbu
+bgMusic.currentTime = 0; // reset na začátek
+
+crashSound.currentTime = 0;
+crashSound.play();
+
         
 let name = prompt("Konec hry! Zadej jméno (max 10 znaků):");
 
@@ -360,7 +371,9 @@ function startGame() {
     clearInterval(gameInterval);
     gameInterval = setInterval(gameLoop, 220);
 
+	bgMusic.currentTime = 0;
     bgMusic.play();
+
 }
 
 
